@@ -38,7 +38,7 @@ public class SecurityConfig {
 				)
 				.formLogin(login -> login
 						//ログイン時のURLを指定
-						.loginPage("/login")
+						.loginPage("/top")
 						//認証後にリダイレクトする場所を指定
 						.defaultSuccessUrl("/")
 						.permitAll()
