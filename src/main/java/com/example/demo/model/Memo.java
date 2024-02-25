@@ -9,7 +9,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
+import lombok.Getter;
+import lombok.Setter;
+@Setter
+@Getter
 public class Memo {
 	//主キー、自動生成
 	@Id
