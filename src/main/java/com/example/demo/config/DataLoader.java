@@ -23,6 +23,7 @@ public class DataLoader implements ApplicationRunner{
 		var user = new Account();
 		user.setUsername("admin");
 		user.setPassword(passwordEncoder.encode("password"));
+		user.setEmail("test@test");
 		
 		userRepository.save(user);
 	}
