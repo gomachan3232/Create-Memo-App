@@ -34,6 +34,8 @@ public class SecurityConfig {
 					//「cssやjs、imagesなどの静的リソース」をアクセス可能にする
 					.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 					.permitAll()
+					.requestMatchers("/registerUser","/login")
+					.permitAll()
 					.anyRequest().authenticated()
 				)
 				.formLogin(login -> login
