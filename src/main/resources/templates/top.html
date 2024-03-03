@@ -1,39 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th = "http://www.thymeleaf.org">
+<html>
 <head>
-<meta charset="UTF-8" th:remove = "tag">
-<link th:href = "@{/css/memoApp.css}" rel = "stylesheet">
-
-<title>トップページ</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-    
-    <div class = "container">
-        <header class = "header">
-            <div class = "header-title bold">
-                学習メモApp✐
-            </div>
-        </header>
-        <div class = "content">
-            <div class = "top-page-heading center">
-                <div class = "bold underline">
-                    学習メモAppへようこそ！
-                </div>
-                このアプリは学習メモを保存することができ、<br>
-                日付や単語で検索することが出来るサービスです。<br>
-            </div>
-            
-            <div class = "top-buttons">
-                <a th:href = "@{/registerUser}"class = "top-registeruser-btn bold">
-                    新規
-                </a>
-                <a th:href = "@{/login}" class = "top-login-btn bold">
-                    ログイン
-                </a>
-            </div>
-        </div>    
-    </div>
-    
 
 </body>
 </html>
