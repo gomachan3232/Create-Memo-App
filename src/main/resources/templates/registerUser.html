@@ -1,10 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th = "http://thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8" th:remove = "tag">
+<link th:href = "@{/css/memoApp.css}" rel = "stylesheet">
+
+<title>新規登録</title>
 </head>
 <body>
-
+    
+    <div class = "container">
+        <header class = "header">
+            <div class = "header-title bold">
+                学習メモApp✐
+            </div>
+        </header>
+        
+        <div class = "content">
+            <div class = "content-title center blue bold">
+                アカウント登録
+            </div>
+            <div class = "form-body center">
+	            <form th:action = "@{/registerUser}" th:object = "${user}" method = "post" novalidate>
+	            
+	                <div class = "form-wrapper">
+		                <label for = "username" class = "form-label">
+		                    ユーザ名(変更不可)
+		                    <span class = "red">*</span>
+		                </label>
+		                <input class = "form-control" type = "text" placeholder = "3文字以上12文字以内" th:errorclass = "is-invalid" th:field = "*{username}">
+	                </div>
+	                <div class = "invalid-feedback red" th:errors = "*{username}">
+                    </div><br>
+	                
+	                <div class = "form-wrapper">
+		                <label for = "e-mail" class = "form-label">
+		                    メールアドレス
+		                    <span class = "red">*</span>
+		                </label>
+		                <input class = "form-control" type = "text" placeholder = "メールアドレスを入力" th:errorclass = "is-invalid" th:field = "*{email}">
+	                </div>
+	                <div class = "invalid-feedback red" th:errors = "*{email}">
+                    </div><br>
+	                
+	                <div class = "form-wrapper">
+		                <label for = "password" class = "form-label">
+		                    パスワード
+		                    <span class = "red">* </span>
+		                </label>
+		                <input class = "form-control form-password" type = "password" placeholder = "6文字以上半角英字大小数字含む" th:errorclass = "is-invalid" th:field = "*{password}">
+	                </div>
+	                <div class = "invalid-feedback red" th:errors = "*{password}">
+                    </div><br>
+	                
+	                <button class = "form-btn blue" type = "submit">
+	                   登録
+	                </button>
+	                
+	            </form>
+	        </div>
+        </div>
+    </div>
 </body>
 </html>

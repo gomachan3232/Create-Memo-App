@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link th:href = "@{/css/memoApp.css}" rel = "stylesheet">
+<title>ログイン</title>
+</head>
+<body>
+
+    <div class = "container">
+        <header class = "header">
+            <div class = "header-title bold">
+                学習メモApp✐
+            </div>
+        </header>
+        
+        <div class = "content">
+            <div class = "content-title center green bold">
+                ログイン
+            </div>
+            <div class = "form-body center">
+                <form th:action = "@{/top}" method = "post">
+                
+                    <div th:if = "${param.registerUser}" class = "register-message">
+                        ユーザを新規登録しました
+                    </div>
+                    <div th:if="${param.error}" class = "red">
+                        ログインに失敗しました
+                        <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
+                            <span th:text = "${session[SPRING_SECURITY_LAST_EXCEPTION].message}"></span>
+                        </div>
+                    </div>
+                    
+                    <div class = "form-wrapper">
+                        <label for = "username" class = "form-label">
+                            ユーザ名
+                        </label>
+                        <input class = "form-control" type = "text" name = "username" placeholder = "ユーザ名"><br>
+                    </div>
+                    
+                    <div class = "form-wrapper">
+                        <label for = "password" class = "form-label">
+                            パスワード
+                        </label>
+                        <input class = "form-control" type = "password" name = "password" placeholder = "パスワード"><br>
+                    </div>
+                    
+                    <button class = "form-btn green" type = "submit">
+                       ログイン
+                    </button>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
