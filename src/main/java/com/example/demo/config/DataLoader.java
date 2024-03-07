@@ -21,8 +21,10 @@ public class DataLoader implements ApplicationRunner{
 	public void run(ApplicationArguments args) throws Exception {
 		//adminユーザを作成
 		var user = new Account();
+		
 		user.setUsername("admin");
-		user.setPassword(passwordEncoder.encode("password"));
+		user.setPassword(passwordEncoder.encode("Password1"));
+		user.setEmail("test@test");
 		
 		userRepository.save(user);
 	}
