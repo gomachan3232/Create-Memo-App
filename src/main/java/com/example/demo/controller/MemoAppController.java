@@ -30,7 +30,7 @@ public class MemoAppController {
 	}
 	
 	@GetMapping("/registerUser")
-	public String registerUser() {
+	public String registerUser(@ModelAttribute("user") Account user) {
 		return "registerUser";
 	}
 	
@@ -39,7 +39,7 @@ public class MemoAppController {
 			BindingResult result,Model model) {
 		
 		if(result.hasErrors()) {
-			return "register";
+			return "registerUser";
 		}
 		//パスワードをエンコードし、ユーザを登録
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -47,7 +47,7 @@ public class MemoAppController {
 		
 		model.addAttribute("username", user.getUsername());
 		
-		return "redirect:/memo";
+		return "redirect:/login?registerUser";
 	}
 	
 	@GetMapping("/editUser")

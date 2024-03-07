@@ -34,6 +34,8 @@ public class SecurityConfig {
 					//「cssやjs、imagesなどの静的リソース」をアクセス可能にする
 					.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 					.permitAll()
+					.requestMatchers("/registerUser","/login")
+					.permitAll()
 					.anyRequest().authenticated()
 				)
 				.formLogin(login -> login
@@ -41,6 +43,7 @@ public class SecurityConfig {
 						.loginPage("/top")
 						//認証後にリダイレクトする場所を指定
 						.defaultSuccessUrl("/")
+						.failureUrl("/login?error")
 						.permitAll()
 				)
 				//ログアウトの設定
