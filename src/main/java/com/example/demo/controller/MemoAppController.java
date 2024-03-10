@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.Account;
+import com.example.demo.model.Memo;
+import com.example.demo.repository.MemoRepository;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.service.MemoService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,12 +23,15 @@ import lombok.RequiredArgsConstructor;
 public class MemoAppController {
 	
 	private final UserRepository userRepository;
+	private final MemoRepository memoRepository;
 	private final PasswordEncoder passwordEncoder;
+	private final MemoService memoService;
 	
 	@GetMapping("/")
-	public String showList(Authentication loginUser, Model model) {
+	public String showList(Authentication loginUser,@ModelAttribute("memo") Memo memo, Model model) {
 		model.addAttribute("username", loginUser.getName());
 		model.addAttribute("authority", loginUser.getAuthorities());
+		model.addAttribute("memo", memoService.getSearch(loginUser));
 		return "memo";
 	}
 	

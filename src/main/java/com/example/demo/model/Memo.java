@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 @Setter
 @Getter
+@Entity
 public class Memo {
 	//主キー、自動生成
 	@Id
@@ -20,7 +22,7 @@ public class Memo {
 	private Long id;
 	
 	//アカウントのユーザ名
-	private Account userName;
+	private String userName;
 	
 	//日付へ変換
 	@DateTimeFormat(iso = ISO.DATE)
