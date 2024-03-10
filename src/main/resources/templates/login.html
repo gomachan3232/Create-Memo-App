@@ -15,15 +15,15 @@
         </header>
         
         <div class = "content">
+            <div th:if = "${param.registerUser}" class = "register-message center">
+                ユーザを新規登録しました
+            </div>
             <div class = "content-title center green bold">
                 ログイン
             </div>
             <div class = "form-body center">
                 <form th:action = "@{/top}" method = "post">
-                
-                    <div th:if = "${param.registerUser}" class = "register-message">
-                        ユーザを新規登録しました
-                    </div>
+
                     <div th:if="${param.error}" class = "red">
                         ログインに失敗しました
                         <div th:if="${session[SPRING_SECURITY_LAST_EXCEPTION] != null}">
