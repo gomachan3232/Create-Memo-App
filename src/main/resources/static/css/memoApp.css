@@ -10,6 +10,10 @@ body {
     font-weight: bold;
 }
 
+.flex {
+    display: flex;
+}
+
 .underline {
     text-decoration: underline;
 }
@@ -37,6 +41,39 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.header-menu {
+    justify-content: right;
+    padding-right: 1vw;
+    padding-top: 4vh;
+    font-size: 2.5vh;
+    letter-spacing: 0.05em;
+}
+
+.header-menu-list {
+    list-style: none;
+    margin-right: 5vw;
+}
+
+.header-editUser-button {
+    color: black;
+    text-decoration: underline;
+}
+
+.header-editUser-button:hover {
+    color: #8E8E8E;
+    transition: .2s;
+}
+
+.header-logout-button {
+    color: black;
+    text-decoration: underline;
+}
+
+.header-logout-button:hover {
+    color: #8E8E8E;
+    transition: .2s;
 }
 
 .top-page-heading {

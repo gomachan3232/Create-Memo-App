@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th = "http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<link th:href = "@{/css/memoApp.css}" rel = "stylesheet">
+<title>メモApp</title>
 </head>
 <body>
-
+    <div class = "container">
+        <header class = "header">
+            <div class = "header-title bold">
+                学習メモApp✐
+            </div>
+            <ul class = "header-menu flex">
+                <li class = "header-menu-list" th:text="|${username} さん|"></li>
+                <li class = "header-menu-list"><a th:href = "@{/editUser}" class = "header-editUser-button">情報変更</a></li>
+                <li class = "header-menu-list"><a th:href = "@{/logout}" class = "header-logout-button">ログアウト</a></li>
+            </ul>
+        </header>
+    
+    </div>
+    <div th:text=${username}></div> 
+    
+    <div th:each = "memo : ${memo}">
+        <div th:text = ${memo.memo}></div>
+        <div th:text = ${memo.id}></div>
+        <div th:text = ${memo.Date}></div>
+    </div>   
 </body>
 </html>
