@@ -53,7 +53,7 @@ body {
 
 .header-menu-list {
     list-style: none;
-    margin-right: 5vw;
+    margin-right: 2vw;
 }
 
 .header-editUser-button {
@@ -194,4 +194,49 @@ body {
     font-size: 24px;
     margin: 0 20vw 30px;
     text-align: center;
+}
+
+.memo-top {
+    height: 5vh;
+    margin-top: 2vh;
+    position: relative;
+}
+
+.memo-title {
+    background-color: #A5A5A5;
+    position: absolute;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    top: 50%;
+    font-size: 2.5vh;
+    color: white;
+    text-decoration: underline;
+    padding: 0.5vh 5vw;
+    letter-spacing: 0.05em;
+}
+
+.memo-date {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    margin-left: 2vw;
+}
+
+.memo-date-input {
+    height: 4vh;
+    width: 15vw;
+    border: 1px solid black;
+}
+
+.memo-search {
+    position: absolute;
+    right: 0%;
+    transform: translateY(-50%) translateX(-50%);
+    top: 50%;
+}
+
+.memo-search-input {
+    height: 4vh;
+    width: 15vw;
+    border: 1px solid black;
 }

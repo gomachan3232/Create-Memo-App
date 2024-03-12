@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link th:href = "@{/css/memoApp.css}" rel = "stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <title>メモApp</title>
 </head>
 <body>
@@ -17,6 +18,19 @@
                 <li class = "header-menu-list"><a th:href = "@{/logout}" class = "header-logout-button">ログアウト</a></li>
             </ul>
         </header>
+        <div class = "memo-top">
+            <div class = "memo-date">
+                <input type = "date" class = "memo-date-input bold"> 
+                ~ 
+                <input type = "date" class = "memo-date-input bold">
+            </div>
+            <div class = "memo-title center">
+                メモ一覧
+            </div>
+            <div class = "memo-search">
+                <i class="fa fa-search"></i> <input type = "text" class = "memo-search-input" placeholder = "検索">
+            </div>
+        </div>
     
     </div>
     <div th:text=${username}></div> 
