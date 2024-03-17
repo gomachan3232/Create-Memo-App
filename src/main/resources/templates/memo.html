@@ -31,14 +31,43 @@
                 <i class="fa fa-search"></i> <input type = "text" class = "memo-search-input" placeholder = "検索">
             </div>
         </div>
+        <div class = "memo-content flex">
+	        <div class = "memo-list">
+	            <div th:each = "memo : ${memo}">
+	               <a th:href = "@{/editMemo/{id}(id = ${memo.Id})}" class = "memo-items flex">
+		               <div th:text = "${#temporals.format(memo.memoDate,'yyyy/MM/dd')}" class = "memo-item-date"></div>
+		               <div th:text = ${memo.memoContent} class = "memo-item-memo"></div>
+		               <div th:text = ${memo.Id}></div>
+	               </a>
+	            </div>
+	        </div>
+	        <div class = "memo-register center">
+	           <div class = "memo-register-title">
+	               メモ作成
+	           </div>
+	           <form th:action = "@{/memo}" th:object = "${memo}" method = "post" id = "memo-form">
+	               <textarea placeholder = "メモを入力" class = "memo-register-memo" name = "memoContent" ></textarea><br>
+	               <div th:if="${param.error}" class = "red">
+	                   メモの登録に失敗しました。<br>
+	                   空白か、文字数が500文字以上の可能性があります。
+	               </div>
+	               <input type = "submit" value = "登録" class = "memo-register-button">
+	           </form>
+	        </div>
+        </div>
     
     </div>
-    <div th:text=${username}></div> 
-    
-    <div th:each = "memo : ${memo}">
-        <div th:text = ${memo.memo}></div>
-        <div th:text = ${memo.id}></div>
-        <div th:text = ${memo.Date}></div>
-    </div>   
+    <script type="text/javascript">
+        // Enterキーが押された時にSubmitされるのを抑制する
+        document.getElementById("memo-form").onkeypress = (e) => {
+            // memo-formに入力されたキーを取得
+            const key = e.keyCode || e.charCode || 0;
+            // 13はEnterキーのキーコード
+            if (key == 13) {
+                // アクションを行わない
+                e.preventDefault();
+            }
+        }
+    </script>
 </body>
 </html>

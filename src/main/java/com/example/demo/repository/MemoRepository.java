@@ -6,5 +6,4 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import com.example.demo.model.Memo;
 
 public interface MemoRepository  extends JpaRepository<Memo, Long>, JpaSpecificationExecutor<Memo>{
-
 }

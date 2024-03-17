@@ -1,9 +1,8 @@
 package com.example.demo.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,12 +24,12 @@ public class Memo {
 	private String userName;
 	
 	//日付へ変換
-	@DateTimeFormat(iso = ISO.DATE)
-	private LocalDate Date;
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	private LocalDateTime memoDate;
 	
 	//必須入力、文字列が500文字まで
 	@NotBlank
 	@Size(max = 500)
-	private String memo;
+	private String memoContent;
 	
 }

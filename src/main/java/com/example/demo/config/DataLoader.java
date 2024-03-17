@@ -1,6 +1,6 @@
 package com.example.demo.config;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -34,8 +34,8 @@ public class DataLoader implements ApplicationRunner{
 		userRepository.save(user);
 		
 		var memo = new Memo();
-		memo.setMemo("sample");
-		memo.setDate(LocalDate.parse("2024-01-01"));
+		memo.setMemoContent("sample");
+		memo.setMemoDate(LocalDateTime.now());
 		memo.setUserName("admin");
 		
 		memoRepository.save(memo);

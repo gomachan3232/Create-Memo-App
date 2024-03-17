@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.model.Account;
@@ -32,6 +35,24 @@ public class MemoAppController {
 		model.addAttribute("username", loginUser.getName());
 		model.addAttribute("authority", loginUser.getAuthorities());
 		model.addAttribute("memo", memoService.getSearch(loginUser));
+		return "memo";
+	}
+	
+	@PostMapping("/memo")
+	public String memo(@Validated @ModelAttribute("memo") Memo memo, BindingResult result, Authentication loginUser, Model model) {
+		model.addAttribute("username", loginUser.getName());
+		model.addAttribute("authority", loginUser.getAuthorities());
+		if(result.hasErrors()) {
+			model.addAttribute("memo", memoService.getSearch(loginUser));
+			return "redirect:/?error";
+		}
+		memo.setMemoDate(LocalDateTime.now());
+		memo.setUserName(loginUser.getName());
+		
+		memoRepository.save(memo);
+		
+		model.addAttribute("memo", memoService.getSearch(loginUser));
+		
 		return "memo";
 	}
 	
@@ -71,8 +92,11 @@ public class MemoAppController {
 		return "top";
 	}
 	
-	@GetMapping("/editMemo")
-	public String editMemo() {
+	@GetMapping("/editMemo/{id}")
+	public String editMemo(@ModelAttribute("memo") Memo memo, Authentication loginUser, Model model, @PathVariable Long id) {
+		model.addAttribute("username", loginUser.getName());
+		model.addAttribute("authority", loginUser.getAuthorities());
+		model.addAttribute("memoData", memoService.findById(id));
 		return "editMemo";
 	}
 

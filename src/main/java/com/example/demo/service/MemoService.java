@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,14 @@ public class MemoService {
 	public List<Memo> getSearch(Authentication loginUser) {
 		
 		String username = loginUser.getName();
-		MemoSpecification<Memo> spec = new MemoSpecification<>();
+		Specification<Memo> spec = new MemoSpecification<Memo>().usernameEqual(username);
+		Sort sort = Sort.by(Sort.Direction.DESC, "memoDate");
+		return memoRepository.findAll(spec, sort);
 		
-		return memoRepository.findAll(
-				Specification.where(spec.usernameEqual(username)));
-		
+	}
+	
+	public Memo findById(Long id) {
+		return memoRepository.findById(id).get();
 	}
 
 }
