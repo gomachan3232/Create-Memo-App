@@ -96,8 +96,27 @@ public class MemoAppController {
 	public String editMemo(@ModelAttribute("memo") Memo memo, Authentication loginUser, Model model, @PathVariable Long id) {
 		model.addAttribute("username", loginUser.getName());
 		model.addAttribute("authority", loginUser.getAuthorities());
-		model.addAttribute("memoData", memoService.findById(id));
+		model.addAttribute("memo", memoService.findById(id));
 		return "editMemo";
+	}
+	
+	@PostMapping("editMemo/{id}")
+	public String updateMemo(@Validated @ModelAttribute("memo") Memo memo, BindingResult result, Model model, @PathVariable Long id) {
+
+		if(result.hasErrors()) {
+			model.addAttribute("memo", memoService.findById(id));
+			return "redirect:/editMemo/{id}?error";
+		}
+		
+		memoRepository.save(memo);
+		return "redirect:/";
+	}
+	
+	@GetMapping("editMemo/{id}/delete")
+	public String memoDelete(@ModelAttribute("memo") Memo memo, @PathVariable Long id) {
+		
+		memoRepository.delete(memo);
+		return "redirect:/";
 	}
 
 }

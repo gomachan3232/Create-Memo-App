@@ -22,12 +22,24 @@ body {
     color: red;
 }
 
+.background-red {
+    background-color: red;
+}
+
 .blue {
     background-color: #5B9BD5;
 }
 
 .green {
     background-color: #70AD47;
+}
+
+.brown {
+    background-color: #DD5B13;
+}
+
+.orange {
+    background-color: #ED7D31;
 }
 
 .header {
@@ -262,7 +274,7 @@ body {
 
 .memo-items:hover {
     background-color: darkgray;
-    transition: .3s;
+    transition: .1s;
     cursor: pointer;
 }
 
@@ -306,4 +318,53 @@ body {
 .memo-register-button:hover {
     opacity: 0.7;
     transition: .3s;
+}
+
+.editMemo-title-wrapper {
+    position: relative;
+}
+
+.editMemo-content-title {
+    padding: 10px 0px;
+    margin: 50px 20vw;
+    font-size: 30px;
+    text-decoration: underline;
+    color: white;
+    letter-spacing: 0.1em;
+}
+
+.editMemo-left-arrow {
+    position: absolute;
+    top: 50%;
+    font-size: 30px;
+    margin-left: 5vw;
+    transform: translateY(-50%);
+    padding: 1vh 2vw;
+    text-decoration: none;
+    color: black;
+}
+
+.editMemo-left-arrow:hover {
+    background-color: darkgray;
+    transition: .3s;
+}
+
+.editMemo-form-label {
+    width: 100px;   
+    margin: auto 0 auto 20vw;
+}
+
+.editMemo-memoContent {
+    height: 20vh;
+    width: 100%;
+    margin: 10vh 20vw 10vh 0;
+}
+
+.editMemo-delete-button {
+    margin-right: 2vw;
+    text-decoration: none;
+}
+
+.editMemo-update-button {
+    margin-left: 2vw;
 }

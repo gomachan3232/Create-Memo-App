@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th = "http://thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8" th:remove = "tag">
+<link th:href = "@{/css/memoApp.css}" rel = "stylesheet">
+<title>メモ編集</title>
 </head>
 <body>
-
+    <div class = "container">
+        <header class = "header">
+            <div class = "header-title bold">
+                学習メモApp✐
+            </div>
+        </header>
+	    <div class = "content">
+            <div class = "editMemo-title-wrapper">
+                <a th:href = "@{/}" class = "editMemo-left-arrow bold">←</a>
+			    <div class = "editMemo-content-title center brown bold">
+			        メモ編集
+			    </div>
+		    </div>
+		    <div class = "form-body center">
+                
+		        <form th:action = "@{/editMemo/{id}(id =*{id})}" method = "post" th:object = "${memo}" id = "memo-editform">
+		
+		            <div th:if="${param.error}" class = "red">
+                        メモの編集に失敗しました。<br>
+                        空白か、文字数が500文字以上の可能性があります。
+		            </div>
+		            <div class = "form-wrapper">
+                        <input type = "hidden" name = "id" th:field = "*{id}">
+                        <input type = "hidden" name = "memoDate" th:field = "*{memoDate}">
+                        <input type = "hidden" name = "userName" th:field = "*{userName}">
+		                <label for = "memoContent" class = "editMemo-form-label">
+		                    メモ
+		                </label>
+		                <textarea class = "form-control editMemo-memoContent" name = "memoContent" placeholder = "メモを入力" th:field = "*{memoContent}"></textarea><br>
+		            </div>
+		            
+		            <a th:href = "@{/editMemo/{id}/delete(id = *{id})}" class = "form-btn background-red editMemo-delete-button" >削除</a>
+		            <input class = "form-btn orange editMemo-update-button" type = "submit" value = "更新">
+		            
+		        </form>
+	        </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        // Enterキーが押された時にSubmitされるのを抑制する
+        document.getElementById("memo-editform").onkeypress = (e) => {
+            // memo-editformに入力されたキーを取得
+            const key = e.keyCode || e.charCode || 0;
+            // 13はEnterキーのキーコード
+            if (key == 13) {
+                // アクションを行わない
+                e.preventDefault();
+            }
+        }
+    </script>
 </body>
 </html>
