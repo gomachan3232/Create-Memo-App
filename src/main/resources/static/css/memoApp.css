@@ -34,6 +34,10 @@ body {
     background-color: #70AD47;
 }
 
+.yellow {
+    background-color: #FFC000;
+}
+
 .brown {
     background-color: #DD5B13;
 }
@@ -367,4 +371,8 @@ body {
 
 .editMemo-update-button {
     margin-left: 2vw;
+}
+
+.editUser-username {
+    text-align: left;
 }

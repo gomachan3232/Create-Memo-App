@@ -18,6 +18,8 @@ import com.example.demo.model.Memo;
 import com.example.demo.repository.MemoRepository;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.MemoService;
+import com.example.demo.validator.CreateUser;
+import com.example.demo.validator.EditUser;
 
 import lombok.RequiredArgsConstructor;
 
@@ -62,7 +64,7 @@ public class MemoAppController {
 	}
 	
 	@PostMapping("/registerUser")
-	public String process(@Validated @ModelAttribute("user") Account user,
+	public String process(@ModelAttribute("user") @Validated(CreateUser.class) Account user,
 			BindingResult result,Model model) {
 		
 		if(result.hasErrors()) {
@@ -78,8 +80,26 @@ public class MemoAppController {
 	}
 	
 	@GetMapping("/editUser")
-	public String editUser() {
+	public String editUser(@ModelAttribute("user") Account user, Authentication loginUser, Model model) {
+		model.addAttribute("loginUserName", loginUser.getName());
 		return "editUser";
+	}
+	
+	@PostMapping("/editUser")
+	public String updateUser(@ModelAttribute("user") @Validated(EditUser.class) Account user,BindingResult result, Authentication loginUser,Model model) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("loginUserName", loginUser.getName());
+			return "editUser";
+		}
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		userRepository.save(user);
+		return "redirect:/";
+	}
+	
+	@GetMapping("/error")
+	public String blankMapping() {
+	    return "redirect:/";
 	}
 	
 	@GetMapping("/login")

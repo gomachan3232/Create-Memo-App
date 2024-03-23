@@ -37,7 +37,6 @@
 	               <a th:href = "@{/editMemo/{id}(id = ${memo.Id})}" class = "memo-items flex">
 		               <div th:text = "${#temporals.format(memo.memoDate,'yyyy/MM/dd')}" class = "memo-item-date"></div>
 		               <div th:text = ${memo.memoContent} class = "memo-item-memo"></div>
-		               <div th:text = ${memo.Id}></div>
 	               </a>
 	            </div>
 	        </div>
