@@ -19,17 +19,21 @@
             </ul>
         </header>
         <div class = "memo-top">
-            <div class = "memo-date">
-                <input type = "date" class = "memo-date-input bold"> 
-                ~ 
-                <input type = "date" class = "memo-date-input bold">
-            </div>
-            <div class = "memo-title center">
-                メモ一覧
-            </div>
-            <div class = "memo-search">
-                <i class="fa fa-search"></i> <input type = "text" class = "memo-search-input" placeholder = "検索">
-            </div>
+            <form th:action = "@{/searchResults}" th:object = "${memo}" method = "get" id = "memo-search-form">
+	            <div class = "memo-date">
+	                <input type = "date" class = "memo-date-input bold" name = "startDate" th:value = "${startDate}">
+	                ~ 
+	                <input type = "date" class = "memo-date-input bold" name = "endDate" th:value = "${endDate}">
+	                <input type = "submit" value = "検索" class = "memo-search-button">
+	            </div>
+	            <div class = "memo-title center">
+	                メモ一覧
+	            </div>
+	            <div class = "memo-search">
+	                <i class="fa fa-search"></i> <input type = "text" class = "memo-search-input" placeholder = "検索" name = "keyword" th:value = ${keyword}>
+	                <input type = "submit" value = "検索" class = "memo-search-button">
+	            </div>
+            </form>
         </div>
         <div class = "memo-content flex">
 	        <div class = "memo-list">

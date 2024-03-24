@@ -1,17 +1,20 @@
 package com.example.demo.controller;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Account;
 import com.example.demo.model.Memo;
@@ -36,7 +39,30 @@ public class MemoAppController {
 	public String showList(Authentication loginUser,@ModelAttribute("memo") Memo memo, Model model) {
 		model.addAttribute("username", loginUser.getName());
 		model.addAttribute("authority", loginUser.getAuthorities());
-		model.addAttribute("memo", memoService.getSearch(loginUser));
+		model.addAttribute("memo", memoService.getLoginUserMemo(loginUser));
+		return "memo";
+	}
+	
+	@GetMapping("/searchResults")
+	public String searchResultsList(Authentication loginUser,@ModelAttribute("memo") Memo memo, Model model,
+			@RequestParam("keyword")String keyword,
+			@RequestParam("startDate")String startDate,
+			@RequestParam("endDate")String endDate) {
+		DateTimeFormatter withoutZone = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime startDateTime = null;
+		LocalDateTime endDateTime = null;
+		if(!StringUtils.isEmpty(startDate)) {
+			startDateTime = LocalDateTime.parse(startDate + " 00:00:00", withoutZone);
+		}
+		 if(!StringUtils.isEmpty(endDate)) {
+			 endDateTime = LocalDateTime.parse(endDate + " 23:59:59", withoutZone);
+		 }
+		model.addAttribute("username", loginUser.getName());
+		model.addAttribute("authority", loginUser.getAuthorities());
+		model.addAttribute("memo", memoService.memoSearch(keyword, loginUser.getName(),startDateTime,endDateTime));
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
 		return "memo";
 	}
 	
@@ -45,7 +71,7 @@ public class MemoAppController {
 		model.addAttribute("username", loginUser.getName());
 		model.addAttribute("authority", loginUser.getAuthorities());
 		if(result.hasErrors()) {
-			model.addAttribute("memo", memoService.getSearch(loginUser));
+			model.addAttribute("memo", memoService.getLoginUserMemo(loginUser));
 			return "redirect:/?error";
 		}
 		memo.setMemoDate(LocalDateTime.now());
@@ -53,7 +79,7 @@ public class MemoAppController {
 		
 		memoRepository.save(memo);
 		
-		model.addAttribute("memo", memoService.getSearch(loginUser));
+		model.addAttribute("memo", memoService.getLoginUserMemo(loginUser));
 		
 		return "memo";
 	}

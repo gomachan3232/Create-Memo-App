@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;
@@ -20,7 +21,7 @@ public class MemoService {
 		this.memoRepository = memoRepository;
 	}
 	
-	public List<Memo> getSearch(Authentication loginUser) {
+	public List<Memo> getLoginUserMemo(Authentication loginUser) {
 		
 		String username = loginUser.getName();
 		Specification<Memo> spec = new MemoSpecification<Memo>().usernameEqual(username);
@@ -31,6 +32,15 @@ public class MemoService {
 	
 	public Memo findById(Long id) {
 		return memoRepository.findById(id).get();
+	}
+	
+	public List<Memo> memoSearch(String keyword, String loginUser, LocalDateTime startDate, LocalDateTime endDate) {
+		MemoSpecification<Memo> spec = new MemoSpecification<Memo>();
+		Sort sort = Sort.by(Sort.Direction.DESC, "memoDate");
+		return memoRepository.findAll(Specification.where(spec.memoContains(keyword))
+				.and(spec.usernameEqual(loginUser))
+				.and(spec.startDateGreaterThanEqual(startDate))
+				.and(spec.endDateGreaterThanEqual(endDate)), sort);
 	}
 
 }
