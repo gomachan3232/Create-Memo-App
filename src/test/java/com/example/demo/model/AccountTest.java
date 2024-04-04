@@ -9,7 +9,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.validation.annotation.Validated;
 
 import com.example.demo.validator.CreateUser;
 
@@ -19,7 +18,6 @@ import jakarta.validation.Validator;
 
 @SpringBootTest
 @Transactional
-@Validated
 class AccountTest {
 	
 	private final Validator validator;
@@ -126,7 +124,7 @@ class AccountTest {
 	
 	@Test
 	@DisplayName("emailが201文字以上の場合")
-	void emailIsTwoHundred() {
+	void emailIsTwoHundredOneCharactersOrMore() {
 		Account testUser = new Account();
 		testUser.setUsername("testUser");
 		testUser.setEmail("12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345test@example.com");
