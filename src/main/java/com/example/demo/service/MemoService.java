@@ -43,4 +43,11 @@ public class MemoService {
 				.and(spec.endDateGreaterThanEqual(endDate)), sort);
 	}
 
+	//getLoginUserMemoテスト用
+	public List<Memo> getLoginUserMemo(String username) {
+		Specification<Memo> spec = new MemoSpecification<Memo>().usernameEqual(username);
+		Sort sort = Sort.by(Sort.Direction.DESC, "memoDate");
+		return memoRepository.findAll(spec, sort);
+	}
+
 }
