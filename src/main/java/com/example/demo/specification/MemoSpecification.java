@@ -12,6 +12,7 @@ import jakarta.persistence.criteria.Root;
 
 public class MemoSpecification<T> {
 	
+	//ログインユーザ名でメモをフィルタリングする
 	public Specification<T> usernameEqual(String username) {
 		return new Specification<T>() {
 			@Override
@@ -21,6 +22,7 @@ public class MemoSpecification<T> {
 		};
 	}
 	
+	//keywordの文字が含まれているメモをフィルタリング
 	public Specification<T> memoContains(String memo) {
 		return StringUtils.isEmpty(memo) ? null : new Specification<T>() {
 			@Override
@@ -30,6 +32,7 @@ public class MemoSpecification<T> {
 		};
 	}
 	
+	//startDate以降のメモをフィルタリング
 	public Specification<T> startDateGreaterThanEqual(LocalDateTime startDate) {
 		return startDate == null ? null : new Specification<T>() {
 			@Override
@@ -39,6 +42,7 @@ public class MemoSpecification<T> {
 		};
 	}
 	
+	//endDate以前のメモをフィルタリング
 	public Specification<T> endDateGreaterThanEqual(LocalDateTime endDate) {
 		return endDate == null ? null : new Specification<T>() {
 			@Override

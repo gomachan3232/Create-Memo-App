@@ -7,17 +7,20 @@
 </head>
 <body>
     <div class = "container">
+        <!-- ヘッダー -->
         <header class = "header">
             <div class = "header-title bold">
                 学習メモApp✐
             </div>
         </header>
         
+        <!-- コンテンツ -->
         <div class = "content">
             <div class = "content-title center yellow bold">
                 アカウント情報変更
             </div>
             <div class = "form-body center">
+            
                 <form th:action = "@{/editUser}" th:object = "${user}" method = "post">
                    
                     <div class = "form-wrapper">

@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class = "container">
+        <!-- ヘッダー -->
         <header class = "header">
             <div class = "header-title bold">
                 学習メモApp✐
@@ -18,9 +19,12 @@
                 <li class = "header-menu-list"><a th:href = "@{/logout}" class = "header-logout-button">ログアウト</a></li>
             </ul>
         </header>
+        
+        <!-- 検索部 -->
         <div class = "memo-top">
             <form th:action = "@{/searchResults}" th:object = "${memo}" method = "get" id = "memo-search-form">
 	            <div class = "memo-date">
+	               <!-- 日付で検索 -->
 	                <input type = "date" class = "memo-date-input bold" name = "startDate" th:value = "${startDate}">
 	                ~ 
 	                <input type = "date" class = "memo-date-input bold" name = "endDate" th:value = "${endDate}">
@@ -30,12 +34,16 @@
 	                メモ一覧
 	            </div>
 	            <div class = "memo-search">
+	               <!-- 単語で検索 -->
 	                <i class="fa fa-search"></i> <input type = "text" class = "memo-search-input" placeholder = "検索" name = "keyword" th:value = ${keyword}>
 	                <input type = "submit" value = "検索" class = "memo-search-button">
 	            </div>
             </form>
         </div>
+        
+        <!-- メイン部分 -->
         <div class = "memo-content flex">
+            <!-- メモ一覧 -->
 	        <div class = "memo-list">
 	            <div th:each = "memo : ${memo}">
 	               <a th:href = "@{/editMemo/{id}(id = ${memo.Id})}" class = "memo-items flex">
@@ -44,6 +52,7 @@
 	               </a>
 	            </div>
 	        </div>
+	        <!-- メモ登録 -->
 	        <div class = "memo-register center">
 	           <div class = "memo-register-title">
 	               メモ作成

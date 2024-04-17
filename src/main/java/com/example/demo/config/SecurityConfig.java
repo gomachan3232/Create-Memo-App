@@ -20,10 +20,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {
-	
+	//コンストラクタの自動設定（@RequiredArgsConstructor）
 	private final UserRepository userRepository;
 	
 	@Bean
+	//パスワードの暗号化
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
@@ -34,6 +35,7 @@ public class SecurityConfig {
 					//「cssやjs、imagesなどの静的リソース」をアクセス可能にする
 					.requestMatchers(PathRequest.toStaticResources().atCommonLocations())
 					.permitAll()
+					//新規登録画面とログイン画面はログインしていなくてもアクセスできるように設定
 					.requestMatchers("/registerUser","/login")
 					.permitAll()
 					.anyRequest().authenticated()
@@ -43,6 +45,7 @@ public class SecurityConfig {
 						.loginPage("/top")
 						//認証後にリダイレクトする場所を指定
 						.defaultSuccessUrl("/")
+						//認証に失敗した際に遷移する画面
 						.failureUrl("/login?error")
 						.permitAll()
 				)

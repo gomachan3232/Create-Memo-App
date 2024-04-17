@@ -26,18 +26,18 @@ public class DataLoader implements ApplicationRunner{
 	public void run(ApplicationArguments args) throws Exception {
 		//adminユーザを作成
 		var user = new Account();
-		
 		user.setUsername("admin");
 		user.setPassword(passwordEncoder.encode("Password1"));
 		user.setEmail("test@test");
-		
+		//DBに保存
 		userRepository.save(user);
 		
+		//メモを作成
 		var memo = new Memo();
 		memo.setMemoContent("sample");
 		memo.setMemoDate(LocalDateTime.now());
 		memo.setUserName("admin");
-		
+		//DBに保存
 		memoRepository.save(memo);
 	}
 
