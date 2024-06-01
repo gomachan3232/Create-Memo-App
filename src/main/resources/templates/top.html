@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" th:remove = "tag">
 <link th:href = "@{/css/memoApp.css}" rel = "stylesheet">
-
+<script th:src = "@{/js/script.js}" defer></script>
 <title>トップページ</title>
 </head>
 <body>
@@ -20,7 +20,7 @@
             <div th:if = "${param.logout}" class = "logout-message red">
                 ログアウトしました
             </div>
-            <div class = "top-page-heading center">
+            <div class = "top-page-heading center" id = "top-page-item">
                 <div class = "bold underline">
                     学習メモAppへようこそ！
                 </div>
@@ -29,10 +29,10 @@
             </div>
             
             <div class = "top-buttons">
-                <a th:href = "@{/registerUser}"class = "top-registeruser-btn bold">
+                <a th:href = "@{/registerUser}"class = "top-registeruser-btn bold" id = "top-page-item">
                     新規
                 </a>
-                <a th:href = "@{/login}" class = "top-login-btn bold">
+                <a th:href = "@{/login}" class = "top-login-btn bold" id = "top-page-item">
                     ログイン
                 </a>
             </div>

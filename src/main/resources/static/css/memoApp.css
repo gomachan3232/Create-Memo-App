@@ -116,6 +116,7 @@ body {
     align-items: center;
     width: 400px;
     text-decoration: none;
+    border-radius: 100px;
 }
 
 .top-registeruser-btn:hover {
@@ -131,6 +132,7 @@ body {
     align-items: center;
     width: 400px;
     text-decoration: none;
+    border-radius: 100px;
 }
 
 .top-login-btn:hover {
