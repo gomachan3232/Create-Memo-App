@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <link th:href = "@{/css/memoApp.css}" rel = "stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<script th:src = "@{/js/script.js}" defer></script>
 <title>メモApp</title>
 </head>
 <body>
@@ -58,16 +59,16 @@
 	               メモ作成
 	           </div>
 	           <form th:action = "@{/memo}" th:object = "${memo}" method = "post" id = "memo-form">
-	               <textarea placeholder = "メモを入力" class = "memo-register-memo" name = "memoContent" ></textarea><br>
+	               <textarea placeholder = "メモを入力" class = "memo-register-memo" name = "memoContent" id = "memo-text"></textarea><br>
 	               <div th:if="${param.error}" class = "red">
 	                   メモの登録に失敗しました。<br>
 	                   空白か、文字数が500文字以上の可能性があります。
 	               </div>
-	               <input type = "submit" value = "登録" class = "memo-register-button">
+	               <p><span id = "memo-count">0</span>文字/500文字</p>
+	               <input type = "submit" value = "登録" class = "memo-register-button" id = "memo-btn">
 	           </form>
 	        </div>
         </div>
-    
     </div>
     <script type="text/javascript">
         // Enterキーが押された時にSubmitされるのを抑制する
