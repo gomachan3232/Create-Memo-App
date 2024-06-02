@@ -4,6 +4,9 @@ message.animate({
     opacity: [0, 1],
 }, 2000);
 
+window.setTimeout(() => {
+    message.style.opacity = 0;
+}, 5000);
 
 
 //TOPページの要素を取得（要素は複数あるため、querySelectorAllで取得）

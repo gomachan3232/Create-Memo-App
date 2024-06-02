@@ -46,6 +46,10 @@ body {
     background-color: #ED7D31;
 }
 
+#message {
+    transition: opacity 2s;
+}
+
 .header {
     height: 10vh;
     position: relative;
